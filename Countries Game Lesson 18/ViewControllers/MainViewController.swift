@@ -13,9 +13,11 @@ class MainViewController: UIViewController {
     // MARK: Outlets
     @IBOutlet var gameButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var sliderLevel: UISlider!
     
     //MARK: Properties
     private var countries = [Country]()
+    var level:Level = .medium
     
     
     
@@ -33,6 +35,27 @@ class MainViewController: UIViewController {
         
     }
     
+    //MARK: Actions
+    
+    @IBAction func levelSliderChanged(_ sender: UISlider) {
+        let value = sender.value
+        if value < 0.25{
+            sender.setValue(0.0, animated: false)
+            level = .easy
+        }
+         else if value > 0.25 && value < 0.75 {
+            sender.setValue(0.5, animated: false)
+            level = .medium
+        }else{
+            sender.setValue(1, animated: false)
+            level = .hard
+        }
+        
+    }
+    
+    
+    //MARK: Functions
+    
     private func configurePage() {
         gameButtons.forEach {
             $0.layer.cornerRadius = 10
@@ -43,6 +66,7 @@ class MainViewController: UIViewController {
         if segue.identifier == FlagsViewController.identifier{
             if let vc = segue.destination as? FlagsViewController{
                 vc.countries = self.countries
+                vc.maximumTimeAnswering = level.rawValue
                 vc.userScoreDelgete = self
             }
         }
@@ -50,6 +74,7 @@ class MainViewController: UIViewController {
         if segue.identifier == CapitalCitiesViewController.identifier {
             if let vc = segue.destination as? CapitalCitiesViewController {
                 vc.countries = self.countries
+                vc.maximumTimeToAnswer = level.rawValue
                 vc.userScoreDelegete = self
             }
         }

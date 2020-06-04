@@ -467,11 +467,32 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="dXR-aj-EfH">
+                                <rect key="frame" x="97" y="237" width="220" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTb-gN-nPx">
+                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zh6-cQ-SdH">
+                                        <rect key="frame" x="82.5" y="0.0" width="139.5" height="31"/>
+                                        <connections>
+                                            <action selector="levelSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="U4z-1L-Zxs"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="xei-8C-3YU"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bn2-pw-2wQ" secondAttribute="trailing" constant="20" id="CeV-xc-6Y7"/>
                             <constraint firstItem="Bn2-pw-2wQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JGl-0k-Hfy"/>
+                            <constraint firstItem="dXR-aj-EfH" firstAttribute="top" secondItem="ZfN-zf-sVS" secondAttribute="bottom" constant="56" id="M19-JL-TeZ"/>
                             <constraint firstItem="a2l-AM-v23" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="PLe-xa-eKH"/>
                             <constraint firstItem="sr1-gm-CGI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="S96-VS-MGS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bn2-pw-2wQ" secondAttribute="bottom" constant="370" id="a2o-TF-CB1"/>
@@ -480,11 +501,13 @@
                             <constraint firstItem="Bn2-pw-2wQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="370" id="rpc-eC-CnU"/>
                             <constraint firstItem="a2l-AM-v23" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="sYi-f4-Ywz"/>
                             <constraint firstItem="ZfN-zf-sVS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uNC-Ad-0EH"/>
+                            <constraint firstItem="dXR-aj-EfH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zrB-5R-upW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="scoreLabel" destination="ZfN-zf-sVS" id="fGn-09-B05"/>
+                        <outlet property="sliderLevel" destination="Zh6-cQ-SdH" id="uCE-Vy-5qk"/>
                         <outletCollection property="gameButtons" destination="bx7-sW-snI" collectionClass="NSMutableArray" id="cfb-yK-Vhe"/>
                         <outletCollection property="gameButtons" destination="y1j-Fo-g8r" collectionClass="NSMutableArray" id="u8m-bV-uns"/>
                     </connections>

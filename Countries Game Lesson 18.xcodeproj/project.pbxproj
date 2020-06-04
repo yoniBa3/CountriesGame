@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9F91CC2E3A9E12EE65D0CC8E /* Pods_Countries_Game_Lesson_18.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E83316D93A2BE87F48E9C04C /* Pods_Countries_Game_Lesson_18.framework */; };
 		E90566EA2489599C00FEAEDC /* UIActivityIndicatorViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90566E92489599C00FEAEDC /* UIActivityIndicatorViewExtension.swift */; };
+		E90566EC2489A53800FEAEDC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90566EB2489A53800FEAEDC /* Utils.swift */; };
 		E94F07B1248555CF00F32BCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F07B0248555CF00F32BCF /* AppDelegate.swift */; };
 		E94F07B3248555CF00F32BCF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F07B2248555CF00F32BCF /* SceneDelegate.swift */; };
 		E94F07BB248555CF00F32BCF /* Countries_Game_Lesson_18.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E94F07B9248555CF00F32BCF /* Countries_Game_Lesson_18.xcdatamodeld */; };
@@ -28,6 +29,7 @@
 		967F20ECB1540A0A511637EC /* Pods-Countries Game Lesson 18.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Countries Game Lesson 18.release.xcconfig"; path = "Target Support Files/Pods-Countries Game Lesson 18/Pods-Countries Game Lesson 18.release.xcconfig"; sourceTree = "<group>"; };
 		E83316D93A2BE87F48E9C04C /* Pods_Countries_Game_Lesson_18.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Countries_Game_Lesson_18.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E90566E92489599C00FEAEDC /* UIActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
+		E90566EB2489A53800FEAEDC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E94F07AD248555CF00F32BCF /* Countries Game Lesson 18.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Countries Game Lesson 18.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F07B0248555CF00F32BCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94F07B2248555CF00F32BCF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				E94F07E7248559F200F32BCF /* Country.swift */,
+				E90566EB2489A53800FEAEDC /* Utils.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				E94F07EE24855A0C00F32BCF /* CapitalCitiesViewController.swift in Sources */,
 				E94F07B1248555CF00F32BCF /* AppDelegate.swift in Sources */,
 				E94F07B3248555CF00F32BCF /* SceneDelegate.swift in Sources */,
+				E90566EC2489A53800FEAEDC /* Utils.swift in Sources */,
 				E94F07EF24855A0C00F32BCF /* FlagsViewController.swift in Sources */,
 				E94F07ED24855A0C00F32BCF /* MainViewController.swift in Sources */,
 				E94F07F324855A1800F32BCF /* JsonParser.swift in Sources */,

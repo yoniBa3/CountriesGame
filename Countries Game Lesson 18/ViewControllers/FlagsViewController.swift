@@ -38,7 +38,7 @@ class FlagsViewController: UIViewController {
     
     var randomIndex = 0
     var countries = [Country]()
-    
+    var maximumTimeAnswering: Double = 0
     
     private var userScore = 0 {
         didSet{
@@ -46,7 +46,7 @@ class FlagsViewController: UIViewController {
             
         }
     }
-    private let maximumTimeAnswering: Double = 15.0
+    
     private var correctAnswerCountry: String = ""
     private let radiusSize: CGFloat = 80
     private let shapeLayer = CAShapeLayer()

@@ -34,7 +34,7 @@ class CapitalCitiesViewController: UIViewController {
     
     var userScoreDelegete: UserScoreDelgete!
     var countries = [Country]()
-    var maximumTimeToAnswer: Double = 10.0
+    var maximumTimeToAnswer: Double = 0
     private var userScore = 0 {
         didSet{
             userScoreLabel.text = "Your Score is: \(userScore)"
@@ -74,6 +74,9 @@ class CapitalCitiesViewController: UIViewController {
         }
         isComponnetsEnable(isEnable: false)
         timer.invalidate()
+        Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { (_) in
+            self.resetGame()
+        }
         
     }
     
@@ -118,6 +121,7 @@ class CapitalCitiesViewController: UIViewController {
         if timer != nil {
             timer.invalidate()
         }
+        isComponnetsEnable(isEnable: true)
         startTimer()
         countryNameLabel.text = countries[randomNumber].name
         countryNameLabel.isHidden = false
