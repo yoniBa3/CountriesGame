@@ -1,0 +1,6 @@
+framework module Pods_Countries_Game_Lesson_18 {
+  umbrella header "Pods-Countries Game Lesson 18-umbrella.h"
+
+  export *
+  module * { export * }
+}
