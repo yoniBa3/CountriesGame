@@ -166,7 +166,6 @@ class FlagsViewController: UIViewController {
         randomIndex = ( 0 ..< self.countries.count).randomElement() ?? 0
         let urlString = countries[randomIndex].flag
         correctAnswerCountry = countries[randomIndex].name
-        correctAnswerCountry = countries[randomIndex].name
         flagCustomImageView.loadImageUsingUrlString(urlString: urlString) { (finish) in
             if finish != nil ,finish! {
                 self.activityIndicator.stopAnimating()

@@ -253,8 +253,8 @@
                                 <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYq-xp-fU8">
-                                <rect key="frame" x="133.5" y="240" width="147" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYq-xp-fU8">
+                                <rect key="frame" x="134" y="240" width="146.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="tyf-UL-9nI"/>
                                 </constraints>
@@ -384,7 +384,6 @@
                             <constraint firstItem="AYq-xp-fU8" firstAttribute="centerX" secondItem="Y47-Vu-cZI" secondAttribute="centerX" id="NGN-Yn-gFg"/>
                             <constraint firstItem="uA9-LL-pNb" firstAttribute="leading" secondItem="w13-zQ-EY0" secondAttribute="leading" constant="20" id="T7a-Ip-vFZ"/>
                             <constraint firstItem="vlu-Qd-nzp" firstAttribute="centerX" secondItem="Y47-Vu-cZI" secondAttribute="centerX" id="VVx-eg-rzN"/>
-                            <constraint firstItem="KL1-hy-K1d" firstAttribute="leading" secondItem="AYq-xp-fU8" secondAttribute="trailing" constant="-71" id="a1c-ZJ-uJG"/>
                             <constraint firstItem="vlu-Qd-nzp" firstAttribute="top" secondItem="c2F-4c-kcz" secondAttribute="bottom" constant="280" id="dbY-uL-rRb"/>
                             <constraint firstItem="AYq-xp-fU8" firstAttribute="top" secondItem="ID0-pp-pwB" secondAttribute="bottom" constant="24" id="jld-lJ-hkN"/>
                             <constraint firstItem="ID0-pp-pwB" firstAttribute="top" secondItem="LcA-jk-yyU" secondAttribute="bottom" constant="30" id="o0X-wF-a44"/>
@@ -402,7 +401,7 @@
                         <outlet property="subRegionLabel" destination="K2g-Qj-Y1c" id="GfZ-Pf-vRY"/>
                         <outlet property="timerLabel" destination="K67-4V-e8f" id="net-bw-4hp"/>
                         <outlet property="timerStackView" destination="lyt-re-has" id="T7r-eA-zxU"/>
-                        <outlet property="yourScoreLabel" destination="ID0-pp-pwB" id="BYG-Oh-OC5"/>
+                        <outlet property="userScoreLabel" destination="ID0-pp-pwB" id="BYG-Oh-OC5"/>
                         <outletCollection property="citiesNameButton" destination="KL1-hy-K1d" collectionClass="NSMutableArray" id="Ghs-3I-RW8"/>
                         <outletCollection property="citiesNameButton" destination="rAG-iQ-K9D" collectionClass="NSMutableArray" id="Udg-ue-7M5"/>
                         <outletCollection property="citiesNameButton" destination="9GZ-z2-Sub" collectionClass="NSMutableArray" id="aqb-cA-epo"/>
@@ -463,7 +462,7 @@
                                             <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="r5u-16-Y6l" kind="show" id="XRb-qt-qGq"/>
+                                            <segue destination="r5u-16-Y6l" kind="show" identifier="CapitalCityGame" id="XRb-qt-qGq"/>
                                         </connections>
                                     </button>
                                 </subviews>

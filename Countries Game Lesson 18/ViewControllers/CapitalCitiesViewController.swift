@@ -15,7 +15,7 @@ class CapitalCitiesViewController: UIViewController {
     // MARK: Outlets
     
     @IBOutlet weak var startGameButton: UIButton!
-    @IBOutlet weak var yourScoreLabel: UILabel!
+    @IBOutlet weak var userScoreLabel: UILabel!
     
     @IBOutlet weak var countryNameLabel: UILabel!
     
@@ -30,16 +30,19 @@ class CapitalCitiesViewController: UIViewController {
     @IBOutlet weak var subRegionLabel: UILabel!
     
     // MARK: Properties
+    public static let identifier = "CapitalCityGame"
+    
     var userScoreDelegete: UserScoreDelgete!
     var countries = [Country]()
-    
+    var maximumTimeToAnswer: Double = 10.0
     private var userScore = 0 {
         didSet{
-            
+            userScoreLabel.text = "Your Score is: \(userScore)"
         }
     }
     private var randomNumber = 0
     private var correctAnswer = ""
+    private var timer:Timer!
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -49,7 +52,7 @@ class CapitalCitiesViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        
+        userScoreDelegete.scoreChange(with: userScore)
     }
     
     // MARK: Actions
@@ -58,9 +61,20 @@ class CapitalCitiesViewController: UIViewController {
     }
     
     @IBAction func startGameTapped(_ sender: UIButton) {
+        isComponnetsEnable(isEnable: true)
+        resetGame()
     }
     
     @IBAction func citiesNamesTapped(_ sender: UIButton) {
+        if sender.titleLabel?.text == correctAnswer {
+            sender.backgroundColor = .green
+            userScore += 1
+        }else{
+            sender.backgroundColor = .red
+        }
+        isComponnetsEnable(isEnable: false)
+        timer.invalidate()
+        
     }
     
     @IBAction func hintButtonTapped(_ sender: UIButton) {
@@ -72,16 +86,19 @@ class CapitalCitiesViewController: UIViewController {
     func configurePage() {
         isComponnetsEnable(isEnable: false)
         
-        configureButtonsCornerRadius()
+        configureButtonsCornerRadiusAndHideLabels()
     }
     
-    private func configureButtonsCornerRadius() {
+    private func configureButtonsCornerRadiusAndHideLabels() {
         
         startGameButton.layer.cornerRadius = 10
         citiesNameButton.forEach {
             $0.layer.cornerRadius = 10
         }
         hintbutton.layer.cornerRadius = 10
+        countryNameLabel.isHidden = true
+        subRegionLabel.isHidden = true
+        
     }
     
     private func isComponnetsEnable(isEnable: Bool){
@@ -92,10 +109,72 @@ class CapitalCitiesViewController: UIViewController {
     }
     
     private func resetGame() {
+        subRegionLabel.isHidden = true
         randomNumber = Int.random(in: 0..<countries.count)
         correctAnswer = countries[randomNumber].capital
-        var countriesNames = [countries[randomNumber].name]
+        if correctAnswer == ""{
+            resetGame()
+        }
+        if timer != nil {
+            timer.invalidate()
+        }
+        startTimer()
+        countryNameLabel.text = countries[randomNumber].name
+        countryNameLabel.isHidden = false
         
+        countryNameLabel.text = countries[randomNumber].name
+        
+        setCpaitalCitiesNamesButtons()
+        
+    }
+    
+    private func setCpaitalCitiesNamesButtons(){
+        var citiesNames = [correctAnswer]
+        while citiesNames.count < citiesNameButton.count {
+            let random = Int.random(in: 0..<countries.count)
+            let cityName = countries[random].capital
+            if !citiesNames.contains(cityName) || cityName == ""{
+                citiesNames.append(cityName)
+            }
+        }
+        citiesNames.shuffle()
+        
+        for (index ,button) in citiesNameButton.enumerated() {
+            button.setTitle(citiesNames[index], for: .normal)
+            button.titleLabel?.textAlignment = .center
+            button.titleLabel?.lineBreakMode = .byWordWrapping
+            button.backgroundColor = .white
+        }
+    }
+    
+    
+    
+    private func startTimer() {
+        timerLabel.textColor = .white
+        var seconds = 0
+        var hundredth = 0
+        var secondMessage = ""
+        var hundredtMessage = ""
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1 / 100, repeats: true, block: { _ in
+            if hundredth == 99 {
+                seconds += 1
+                hundredth = 0
+            }else{
+                hundredth += 1
+            }
+            secondMessage = seconds < 10 ? "0\(seconds)" : "\(seconds)"
+            hundredtMessage = hundredth < 10 ? "0\(hundredth)" : "\(hundredth)"
+            self.timerLabel.text = secondMessage + ":" + hundredtMessage
+            
+            if seconds == Int(self.maximumTimeToAnswer){
+                self.timer.invalidate()
+            }
+            
+            if Double(seconds) > self.maximumTimeToAnswer * 0.66{
+                self.timerLabel.textColor = .red
+            }
+        })
     }
     
     

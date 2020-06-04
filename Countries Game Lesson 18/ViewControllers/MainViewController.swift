@@ -46,6 +46,13 @@ class MainViewController: UIViewController {
                 vc.userScoreDelgete = self
             }
         }
+        
+        if segue.identifier == CapitalCitiesViewController.identifier {
+            if let vc = segue.destination as? CapitalCitiesViewController {
+                vc.countries = self.countries
+                vc.userScoreDelegete = self
+            }
+        }
     }
 }
 
