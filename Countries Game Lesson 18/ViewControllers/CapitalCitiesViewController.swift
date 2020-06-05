@@ -81,6 +81,8 @@ class CapitalCitiesViewController: UIViewController {
     }
     
     @IBAction func hintButtonTapped(_ sender: UIButton) {
+        disableHalfButtons()
+        sender.isEnabled = false
     }
     
     
@@ -148,7 +150,33 @@ class CapitalCitiesViewController: UIViewController {
             button.titleLabel?.textAlignment = .center
             button.titleLabel?.lineBreakMode = .byWordWrapping
             button.backgroundColor = .white
+            button.backgroundImage(for: .disabled)
         }
+    }
+    
+    private func disableHalfButtons() {
+        var isAppendCity = false
+        var citys = [correctAnswer]
+        print(correctAnswer)
+        while !isAppendCity {
+            let random = Int.random(in: 0..<citiesNameButton.count)
+            let city = citiesNameButton[random].titleLabel?.text
+            if !citys.contains(city ?? ""){
+                print(city ?? "")
+                citys.append(city ?? "")
+                isAppendCity = true
+            }
+        }
+        
+        citiesNameButton.forEach { (button) in
+            let city = button.titleLabel?.text ?? ""
+            if !citys.contains(city){
+                button.setTitle("", for: .normal)
+                button.backgroundColor = view.backgroundColor
+                
+            }
+        }
+        
     }
     
     

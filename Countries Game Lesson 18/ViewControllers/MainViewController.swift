@@ -18,7 +18,9 @@ class MainViewController: UIViewController {
     //MARK: Properties
     private var countries = [Country]()
     var level:Level = .medium
-    
+    let pereferces = UserDefaults.standard
+    let score = "score"
+    let userLevelPref = "Level"
     
     
     //MARK: Lifecycle
@@ -27,10 +29,10 @@ class MainViewController: UIViewController {
         loadCountries()
         configurePage()
         
-        let pereferces = UserDefaults.standard
-        let score = "score"
         
-        scoreLabel.text = "Your Score:  \(pereferces.object(forKey: score) ?? "0")"
+        
+        
+       
         
         
     }
@@ -51,6 +53,8 @@ class MainViewController: UIViewController {
             level = .hard
         }
         
+        pereferces.set(level.rawValue, forKey: userLevelPref)
+        
     }
     
     
@@ -60,6 +64,26 @@ class MainViewController: UIViewController {
         gameButtons.forEach {
             $0.layer.cornerRadius = 10
         }
+        
+         scoreLabel.text = "Your Score:  \(pereferces.object(forKey: score) ?? "0")"
+        let value = pereferces.object(forKey: userLevelPref) as? Double
+        if value != nil {
+            var setValueforSlider:Float = 0
+            switch value {
+            case 16:
+                level = .easy
+                setValueforSlider = 0
+            case 12:
+                level = .medium
+                setValueforSlider = 0.5
+            default:
+                level = .hard
+                setValueforSlider = 1
+            }
+            
+            self.sliderLevel.setValue(setValueforSlider, animated: false)
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
