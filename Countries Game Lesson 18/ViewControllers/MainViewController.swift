@@ -134,11 +134,13 @@ extension MainViewController{
         let country2 = "Brazil"
         let country3 = "Nepal"
         let country4 = "Qatar"
+        let country5 = "Niue"
         self.countries.removeAll(where: {
             $0.name == country1 ||
                 $0.name == country2 ||
                 $0.name == country3 ||
-                $0.name == country4
+                $0.name == country4 ||
+                $0.name == country5
         })
     }
 }
