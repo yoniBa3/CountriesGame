@@ -2,8 +2,8 @@
 //  Country.swift
 //  CountriesGame
 //
-//  Created by Itzik Bar-Noy on 25/05/2020.
-//  Copyright © 2020 Itzik Bar-Noy. All rights reserved.
+//  Created by Yoni on 01/06/2020.
+//  Copyright © 2020 Yoni. All rights reserved.
 //
 
 import Foundation

@@ -2,8 +2,8 @@
 //  FlagsViewController.swift
 //  CountriesGame
 //
-//  Created by Itzik Bar-Noy on 25/05/2020.
-//  Copyright © 2020 Itzik Bar-Noy. All rights reserved.
+//  Created by Yoni on 01/06/2020.
+//  Copyright © 2020 Yoni. All rights reserved.
 //
 
 import UIKit
@@ -14,23 +14,19 @@ protocol UserScoreDelgete {
 
 class FlagsViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK: -Outlets
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var flagCustomImageView: CustomImageView!
     @IBOutlet var countriesNamesButtons: [UIButton]!
-    
     @IBOutlet weak var timerStackView: UIStackView!
-    
     @IBOutlet weak var timerLabel: UILabel!
-    
     @IBOutlet weak var hintButton: UIButton!
-    
     @IBOutlet weak var useScoreLabel: UILabel!
     
-    // MARK: Activity Indicator
+    // MARK: -Activity Indicator
     private var activityIndicator = UIActivityIndicatorView()
     
-    // MARK: Properties
+    // MARK: -Properties
     var userScoreDelgete:UserScoreDelgete!
     public static var identifier = "FlagsGame"
     
@@ -46,7 +42,6 @@ class FlagsViewController: UIViewController {
             }
             useScoreLabel.text = message
             useScoreLabel.textColor = color
-            
         }
     }
     
@@ -77,7 +72,7 @@ class FlagsViewController: UIViewController {
     
     
     
-    // MARK: Lifecycle
+    // MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,7 +83,6 @@ class FlagsViewController: UIViewController {
         super.viewDidAppear(animated)
         
         animateCircle()
-        
     }
     
     
@@ -97,7 +91,7 @@ class FlagsViewController: UIViewController {
     }
     
     
-    // MARK: Actions
+    // MARK: -Actions
     @IBAction func xMarkButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         
@@ -130,41 +124,29 @@ class FlagsViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    // MARK: Functions
+ 
+    // MARK: -Functions
     private func configurePage() {
         view.addSubview(percentageLabel)
-        
         percentageLabel.frame = CGRect(x: 0, y: 0, width: radiusSize, height: radiusSize)
         percentageLabel.center = view.center
-        
         createTrackLayer()
         flagCustomImageView.layer.cornerRadius = 10
         configureContriesNamesButtons()
-        
-        
-        
     }
     
     private func showMainView() {
         mainView.alpha = 0
         view.addSubview(mainView)
-        
         UIView.animate(withDuration: 0.75, animations: {
             self.mainView.alpha = 1
         },completion: { _ in
             self.resetCountry()
             self.showMainViewComponnets(isHidden: false)
         })
-        
         activityIndicator.setup(view: flagCustomImageView)
         activityIndicator.startAnimating()
-        
     }
-    
-    
     
     private func resetCountry() {
         resterCountriesNamesButton()
@@ -180,9 +162,6 @@ class FlagsViewController: UIViewController {
                 self.setCountriesNameButtonsContent()
             }
         }
-        
-        
-        
     }
     
     
@@ -190,7 +169,6 @@ class FlagsViewController: UIViewController {
         countriesNamesButtons.forEach {
             $0.layer.cornerRadius = 10
         }
-        
         showMainViewComponnets(isHidden: true)
         hintButton.layer.cornerRadius = hintButton.bounds.size.width / 2
     }
@@ -202,22 +180,18 @@ class FlagsViewController: UIViewController {
         useScoreLabel.isHidden = isHidden
         timerStackView.isHidden = isHidden
         hintButton.isHidden = isHidden
-        
     }
     
     private func setCountriesNameButtonsContent(){
         let correctAnswer = [correctAnswerCountry]
         var names = [String]()
         names.append(contentsOf: correctAnswer)
-        
         while names.count < countriesNamesButtons.count {
             let num = Int.random(in: 0..<countries.count)
             let name = countries[num].name
             if !names.contains(name){
                 names.append(name)
             }
-            
-            
         }
         names.shuffle()
         for (index ,button) in countriesNamesButtons.enumerated() {
@@ -246,12 +220,10 @@ class FlagsViewController: UIViewController {
             secondsMessage = (seconds < 10) ? "0\(seconds)" : "\(seconds)"
             hundredthMessage = (hundredth < 10) ? "0\(hundredth)" : "\(hundredth)"
             self.timerLabel.text = secondsMessage + ":" + hundredthMessage
-            
             if seconds == Int(self.level.rawValue){
                 self.timer.invalidate()
                 self.resetCountry()
             }
-            
             if Double(seconds) >= self.level.rawValue * 0.66{
                 self.timerLabel.textColor = .red
             }
@@ -275,7 +247,6 @@ class FlagsViewController: UIViewController {
         default:
             numberOfBtnsToDisappear = 1
         }
-        
         while counter < numberOfBtnsToDisappear {
             let random = Int.random(in: 0..<countriesNamesButtons.count)
             let country = countriesNamesButtons[random].titleLabel?.text
@@ -293,29 +264,23 @@ class FlagsViewController: UIViewController {
                 button.alpha = 0
             }
         }
-        
     }
-    
-    
-    
 }
 
 
 
-//MARK: handle circule load
+//MARK: -handle circule load
 
 extension FlagsViewController{
     
     private func createTrackLayer() {
         let trackLayer = CAShapeLayer()
         let circularPath = UIBezierPath(arcCenter: .zero, radius: radiusSize, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        
         trackLayer.path = circularPath.cgPath
         trackLayer.strokeColor = #colorLiteral(red: 0.1013573185, green: 0.1013607755, blue: 0.1013589278, alpha: 1)
         trackLayer.lineWidth = 10
         trackLayer.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         trackLayer.position = view.center
-        
         view.layer.addSublayer(trackLayer)
         createShapeLayer(cgPath: circularPath.cgPath)
     }
@@ -327,27 +292,19 @@ extension FlagsViewController{
         shapeLayer.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         shapeLayer.position = view.center
         shapeLayer.lineCap = CAShapeLayerLineCap.round
-        
         shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
         shapeLayer.strokeEnd = 0
-        
         view.layer.addSublayer(shapeLayer)
-        
     }
-    
-    
     
     private func animateCircle() {
         let duration: CFTimeInterval = 2
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        
         basicAnimation.toValue = 1
         basicAnimation.duration = duration
         basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
-        
         shapeLayer.add(basicAnimation, forKey: "")
-        
         timer = Timer.scheduledTimer(timeInterval: duration / 100, target: self, selector: #selector(percentageHandle), userInfo: nil, repeats: true)
     }
     

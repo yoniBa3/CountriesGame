@@ -30,7 +30,7 @@
 		E83316D93A2BE87F48E9C04C /* Pods_Countries_Game_Lesson_18.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Countries_Game_Lesson_18.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E90566E92489599C00FEAEDC /* UIActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
 		E90566EB2489A53800FEAEDC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		E94F07AD248555CF00F32BCF /* Countries Game Lesson 18.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Countries Game Lesson 18.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E94F07AD248555CF00F32BCF /* Countries Game .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Countries Game .app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F07B0248555CF00F32BCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94F07B2248555CF00F32BCF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E94F07BA248555CF00F32BCF /* Countries_Game_Lesson_18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Countries_Game_Lesson_18.xcdatamodel; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		E94F07AE248555CF00F32BCF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E94F07AD248555CF00F32BCF /* Countries Game Lesson 18.app */,
+				E94F07AD248555CF00F32BCF /* Countries Game .app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 			);
 			name = "Countries Game Lesson 18";
 			productName = "Countries Game Lesson 18";
-			productReference = E94F07AD248555CF00F32BCF /* Countries Game Lesson 18.app */;
+			productReference = E94F07AD248555CF00F32BCF /* Countries Game .app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -417,7 +417,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Yoni.Countries-Game-Lesson-18";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Countries Game ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -436,7 +436,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Yoni.Countries-Game-Lesson-18";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Countries Game ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

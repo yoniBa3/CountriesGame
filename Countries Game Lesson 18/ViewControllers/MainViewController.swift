@@ -2,23 +2,22 @@
 //  MainViewController.swift
 //  CountriesGame
 //
-//  Created by Itzik Bar-Noy on 25/05/2020.
-//  Copyright © 2020 Itzik Bar-Noy. All rights reserved.
+//  Created by Yoni on 01/06/2020.
+//  Copyright © 2020 Yoni. All rights reserved.
 //
 
 import UIKit
 
 class MainViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK: -Outlets
     @IBOutlet var gameButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sliderLevel: UISlider!
     @IBOutlet weak var stepperLevel: UIStepper!
     @IBOutlet weak var levelLabel: UILabel!
     
-    
-    //MARK: Properties
+    //MARK: -Properties
     private var countries = [Country]()
     var level:Level = .medium {
         didSet{
@@ -37,22 +36,21 @@ class MainViewController: UIViewController {
             }
             levelLabel.textColor = color
             levelLabel.text = levelDescription
+            sliderLevel.tintColor = color
         }
     }
     let pereferces = UserDefaults.standard
     let score = "score"
     let userLevelPref = "Level"
     
-    
-    //MARK: Lifecycle
+    //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCountries()
         configurePage()
     }
     
-    //MARK: Actions
-    
+    //MARK: -Actions
     @IBAction func levelSliderChanged(_ sender: UISlider) {
         let value = sender.value
         if value < 0.25{
@@ -69,14 +67,11 @@ class MainViewController: UIViewController {
             stepperLevel.value = 2.0
             level = .hard
         }
-        
         saveUserLevelInDefaults()
-        
     }
     
     @IBAction func stepperChanged(_ sender: UIStepper) {
         let value = sender.value;
-        
         switch value {
         case 0.0:
             sliderLevel.setValue(0.0, animated: true)
@@ -91,9 +86,8 @@ class MainViewController: UIViewController {
         saveUserLevelInDefaults()
     }
     
-    
-    
-    //MARK: Functions
+
+    //MARK: -Functions
     
     private func configurePage() {
         gameButtons.forEach {
@@ -101,7 +95,7 @@ class MainViewController: UIViewController {
         }
         loadUserScoreData()
         loadUserLevelFromDefaults()
-        
+        stepperLevel.layer.cornerRadius = 5
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,7 +106,6 @@ class MainViewController: UIViewController {
                 vc.userScoreDelgete = self
             }
         }
-        
         if segue.identifier == CapitalCitiesViewController.identifier {
             if let vc = segue.destination as? CapitalCitiesViewController {
                 vc.countries = self.countries
@@ -123,7 +116,7 @@ class MainViewController: UIViewController {
     }
 }
 
-//MARK: Handle data from json
+//MARK: -Handle data from json
 extension MainViewController{
     private func loadCountries() {
         let jsonParser = JsonParser()
@@ -145,11 +138,10 @@ extension MainViewController{
     }
 }
 
-//MARK userScoreDelgate
+//MARK: -UserScoreDelgate
 
 extension MainViewController: UserScoreDelgete{
     func scoreChange(with score: Int) {
-        
         let scoreKey = "score"
         var newScore = score
         let oldScore = pereferces.object(forKey: scoreKey)
@@ -159,11 +151,9 @@ extension MainViewController: UserScoreDelgete{
         self.pereferces.set(newScore, forKey: scoreKey)
         setLabelScoreAndColor(withScore: newScore)
     }
-    
-    
 }
 
-//Mark: Save and Load userData from userDefualts
+//Mark: -Save and Load userData from userDefualts
 extension MainViewController{
     private func saveUserLevelInDefaults(){
         pereferces.set(level.rawValue, forKey: userLevelPref)
