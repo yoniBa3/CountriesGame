@@ -12,24 +12,18 @@ import UIKit
 
 class CapitalCitiesViewController: UIViewController {
 
-    // MARK: Outlets
+    // MARK: -Outlets
     
     @IBOutlet weak var startGameButton: UIButton!
     @IBOutlet weak var userScoreLabel: UILabel!
-    
     @IBOutlet weak var countryNameLabel: UILabel!
-    
     @IBOutlet var citiesNameButton: [UIButton]!
-    
     @IBOutlet weak var timerStackView: UIStackView!
-    
     @IBOutlet weak var timerLabel: UILabel!
-    
     @IBOutlet weak var hintbutton: UIButton!
-    
     @IBOutlet weak var maxLengthLabel: UILabel!
     
-    // MARK: Properties
+    // MARK: -Properties
     public static let identifier = "CapitalCityGame"
     
     var userScoreDelegete: UserScoreDelgete!
@@ -51,7 +45,7 @@ class CapitalCitiesViewController: UIViewController {
     private var correctAnswer = ""
     private var timer:Timer!
     
-    // MARK: Lifecycle
+    // MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,7 +56,8 @@ class CapitalCitiesViewController: UIViewController {
         userScoreDelegete.scoreChange(with: userScore)
     }
     
-    // MARK: Actions
+    
+    // MARK: -Actions
     @IBAction func xMarkButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -87,28 +82,24 @@ class CapitalCitiesViewController: UIViewController {
         Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { (_) in
             self.resetGame()
         }
-        
     }
     
     @IBAction func hintButtonTapped(_ sender: UIButton) {
         UIView.animate(withDuration: 0.75) {
             self.showHint()
         }
-        
         sender.isEnabled = false
     }
     
     
-    // MARK: Functions
+    // MARK: -Functions
     
     func configurePage() {
-        
         isComponnetsEnable(isEnable: false)
         configureButtonsCornerRadiusAndHideLabels()
     }
     
     private func configureButtonsCornerRadiusAndHideLabels() {
-        
         startGameButton.layer.cornerRadius = 10
         citiesNameButton.forEach {
             $0.layer.cornerRadius = 10
@@ -116,7 +107,6 @@ class CapitalCitiesViewController: UIViewController {
         hintbutton.layer.cornerRadius = hintbutton.bounds.size.width / 2
         countryNameLabel.isHidden = true
         maxLengthLabel.isHidden = true
-        
     }
     
     private func isComponnetsEnable(isEnable: Bool){
@@ -138,13 +128,10 @@ class CapitalCitiesViewController: UIViewController {
         if timer != nil {
             timer.invalidate()
         }
-        
         startTimer()
         countryNameLabel.text = countries[randomNumber].name
         countryNameLabel.isHidden = false
-        
         countryNameLabel.text = countries[randomNumber].name
-        
         setCpaitalCitiesNamesButtons()
         
     }
@@ -159,7 +146,6 @@ class CapitalCitiesViewController: UIViewController {
             }
         }
         citiesNames.shuffle()
-        
         for (index ,button) in citiesNameButton.enumerated() {
             button.setTitle(citiesNames[index], for: .normal)
             button.titleLabel?.textAlignment = .center
@@ -167,6 +153,7 @@ class CapitalCitiesViewController: UIViewController {
             button.backgroundColor = .white
         }
     }
+    
     private func showHint(){
         var amountOfExtraLetters = 0
         switch level {
@@ -179,18 +166,13 @@ class CapitalCitiesViewController: UIViewController {
         maxLengthLabel.text = message + String(correctAnswer.count + amountOfExtraLetters)
         maxLengthLabel.isHidden = false
     }
-    
-    
-    
-    
-    
+
     private func startTimer() {
         timerLabel.textColor = .white
         var seconds = 0
         var hundredth = 0
         var secondMessage = ""
         var hundredtMessage = ""
-        
         timer = Timer.scheduledTimer(withTimeInterval: 1 / 100, repeats: true, block: { _ in
             if hundredth == 99 {
                 seconds += 1
@@ -201,18 +183,13 @@ class CapitalCitiesViewController: UIViewController {
             secondMessage = seconds < 10 ? "0\(seconds)" : "\(seconds)"
             hundredtMessage = hundredth < 10 ? "0\(hundredth)" : "\(hundredth)"
             self.timerLabel.text = secondMessage + ":" + hundredtMessage
-            
             if seconds == Int(self.level.rawValue){
                 self.timer.invalidate()
             }
-            
             if Double(seconds) > self.level.rawValue * 0.66{
                 self.timerLabel.textColor = .red
             }
         })
     }
-    
-    
-    
-    
+
 }

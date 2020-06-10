@@ -37,6 +37,7 @@ class MainViewController: UIViewController {
             }
             levelLabel.textColor = color
             levelLabel.text = levelDescription
+            sliderLevel.tintColor = color
         }
     }
     let pereferces = UserDefaults.standard

@@ -18,13 +18,9 @@ class FlagsViewController: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var flagCustomImageView: CustomImageView!
     @IBOutlet var countriesNamesButtons: [UIButton]!
-    
     @IBOutlet weak var timerStackView: UIStackView!
-    
     @IBOutlet weak var timerLabel: UILabel!
-    
     @IBOutlet weak var hintButton: UIButton!
-    
     @IBOutlet weak var useScoreLabel: UILabel!
     
     // MARK: Activity Indicator
@@ -33,10 +29,10 @@ class FlagsViewController: UIViewController {
     // MARK: Properties
     var userScoreDelgete:UserScoreDelgete!
     public static var identifier = "FlagsGame"
-    
     var randomIndex = 0
     var countries = [Country]()
     var level: Level!
+    
     private var userScore = 0 {
         didSet{
             let message = "Your Score is: \(userScore)"
@@ -46,10 +42,8 @@ class FlagsViewController: UIViewController {
             }
             useScoreLabel.text = message
             useScoreLabel.textColor = color
-            
         }
     }
-    
     private var correctAnswerCountry: String = ""
     private let radiusSize: CGFloat = 80
     private let shapeLayer = CAShapeLayer()
@@ -216,8 +210,6 @@ class FlagsViewController: UIViewController {
             if !names.contains(name){
                 names.append(name)
             }
-            
-            
         }
         names.shuffle()
         for (index ,button) in countriesNamesButtons.enumerated() {
@@ -239,10 +231,10 @@ class FlagsViewController: UIViewController {
             if hundredth == 99{
                 seconds += 1
                 hundredth = 0
-                
             }else{
                 hundredth += 1
             }
+            
             secondsMessage = (seconds < 10) ? "0\(seconds)" : "\(seconds)"
             hundredthMessage = (hundredth < 10) ? "0\(hundredth)" : "\(hundredth)"
             self.timerLabel.text = secondsMessage + ":" + hundredthMessage
@@ -327,14 +319,12 @@ extension FlagsViewController{
         shapeLayer.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         shapeLayer.position = view.center
         shapeLayer.lineCap = CAShapeLayerLineCap.round
-        
         shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
         shapeLayer.strokeEnd = 0
         
         view.layer.addSublayer(shapeLayer)
         
     }
-    
     
     
     private func animateCircle() {
