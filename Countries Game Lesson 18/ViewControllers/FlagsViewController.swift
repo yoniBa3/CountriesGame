@@ -29,10 +29,10 @@ class FlagsViewController: UIViewController {
     // MARK: -Properties
     var userScoreDelgete:UserScoreDelgete!
     public static var identifier = "FlagsGame"
-    
     var randomIndex = 0
     var countries = [Country]()
     var level: Level!
+    
     private var userScore = 0 {
         didSet{
             let message = "Your Score is: \(userScore)"
@@ -44,7 +44,6 @@ class FlagsViewController: UIViewController {
             useScoreLabel.textColor = color
         }
     }
-    
     private var correctAnswerCountry: String = ""
     private let radiusSize: CGFloat = 80
     private let shapeLayer = CAShapeLayer()
@@ -213,10 +212,10 @@ class FlagsViewController: UIViewController {
             if hundredth == 99{
                 seconds += 1
                 hundredth = 0
-                
             }else{
                 hundredth += 1
             }
+            
             secondsMessage = (seconds < 10) ? "0\(seconds)" : "\(seconds)"
             hundredthMessage = (hundredth < 10) ? "0\(hundredth)" : "\(hundredth)"
             self.timerLabel.text = secondsMessage + ":" + hundredthMessage
@@ -297,6 +296,10 @@ extension FlagsViewController{
         view.layer.addSublayer(shapeLayer)
     }
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
     private func animateCircle() {
         let duration: CFTimeInterval = 2
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
