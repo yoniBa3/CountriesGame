@@ -25,24 +25,27 @@ class FlagsViewController: UIViewController {
     
     @IBOutlet weak var hintButton: UIButton!
     
-    @IBOutlet weak var subRegionLabel: UILabel!
-    
     @IBOutlet weak var useScoreLabel: UILabel!
     
     // MARK: Activity Indicator
     private var activityIndicator = UIActivityIndicatorView()
     
     // MARK: Properties
-     var userScoreDelgete:UserScoreDelgete!
+    var userScoreDelgete:UserScoreDelgete!
     public static var identifier = "FlagsGame"
     
     var randomIndex = 0
     var countries = [Country]()
-    var maximumTimeAnswering: Double = 0
-    
+    var level: Level!
     private var userScore = 0 {
         didSet{
-            useScoreLabel.text = "Your Score : \(userScore)"
+            let message = "Your Score is: \(userScore)"
+            var color = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
+            if userScore < 0{
+                color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            }
+            useScoreLabel.text = message
+            useScoreLabel.textColor = color
             
         }
     }
@@ -85,7 +88,7 @@ class FlagsViewController: UIViewController {
         super.viewDidAppear(animated)
         
         animateCircle()
-
+        
     }
     
     
@@ -101,17 +104,20 @@ class FlagsViewController: UIViewController {
     }
     
     @IBAction func hintButtonTapped(_ sender: UIButton) {
-        subRegionLabel.text = countries[randomIndex].subregion
-        subRegionLabel.isHidden = false
+        sender.isEnabled = false
+        UIView.animate(withDuration: 0.75) {
+            self.disappearButtons()
+        }
     }
     
     @IBAction func countriesNamesButtonTapped(_ sender: UIButton) {
-        
-        
         if sender.titleLabel?.text == correctAnswerCountry {
             sender.backgroundColor = .green
             userScore += 1
         }else{
+            if level == Level.hard{
+                userScore -= 1
+            }
             sender.backgroundColor = .red
         }
         timer.invalidate()
@@ -133,7 +139,7 @@ class FlagsViewController: UIViewController {
         
         percentageLabel.frame = CGRect(x: 0, y: 0, width: radiusSize, height: radiusSize)
         percentageLabel.center = view.center
-                
+        
         createTrackLayer()
         flagCustomImageView.layer.cornerRadius = 10
         configureContriesNamesButtons()
@@ -162,7 +168,7 @@ class FlagsViewController: UIViewController {
     
     private func resetCountry() {
         resterCountriesNamesButton()
-        subRegionLabel.isHidden = true
+        hintButton.isEnabled = level != Level.hard
         randomIndex = ( 0 ..< self.countries.count).randomElement() ?? 0
         let urlString = countries[randomIndex].flag
         correctAnswerCountry = countries[randomIndex].name
@@ -175,7 +181,7 @@ class FlagsViewController: UIViewController {
             }
         }
         
-            
+        
         
     }
     
@@ -186,7 +192,7 @@ class FlagsViewController: UIViewController {
         }
         
         showMainViewComponnets(isHidden: true)
-        hintButton.layer.cornerRadius = 10
+        hintButton.layer.cornerRadius = hintButton.bounds.size.width / 2
     }
     
     private func showMainViewComponnets(isHidden: Bool) {
@@ -196,7 +202,6 @@ class FlagsViewController: UIViewController {
         useScoreLabel.isHidden = isHidden
         timerStackView.isHidden = isHidden
         hintButton.isHidden = isHidden
-        subRegionLabel.isHidden = true
         
     }
     
@@ -211,7 +216,7 @@ class FlagsViewController: UIViewController {
             if !names.contains(name){
                 names.append(name)
             }
-          
+            
             
         }
         names.shuffle()
@@ -219,6 +224,7 @@ class FlagsViewController: UIViewController {
             button.setTitle(names[index], for: .normal)
             button.titleLabel?.textAlignment = .center
             button.titleLabel?.lineBreakMode = .byWordWrapping
+            button.alpha = 1
         }
         
     }
@@ -241,12 +247,12 @@ class FlagsViewController: UIViewController {
             hundredthMessage = (hundredth < 10) ? "0\(hundredth)" : "\(hundredth)"
             self.timerLabel.text = secondsMessage + ":" + hundredthMessage
             
-            if seconds == Int(self.maximumTimeAnswering){
+            if seconds == Int(self.level.rawValue){
                 self.timer.invalidate()
                 self.resetCountry()
             }
             
-            if Double(seconds) >= self.maximumTimeAnswering * 0.66{
+            if Double(seconds) >= self.level.rawValue * 0.66{
                 self.timerLabel.textColor = .red
             }
         })
@@ -257,6 +263,37 @@ class FlagsViewController: UIViewController {
             button.backgroundColor = .white
             button.setTitle("?", for: .normal)
         }
+    }
+    
+    private func disappearButtons() {
+        var numberOfBtnsToDisappear = 0
+        var countriesName = [String]()
+        var counter = 0
+        switch level {
+        case .easy:
+            numberOfBtnsToDisappear = 2
+        default:
+            numberOfBtnsToDisappear = 1
+        }
+        
+        while counter < numberOfBtnsToDisappear {
+            let random = Int.random(in: 0..<countriesNamesButtons.count)
+            let country = countriesNamesButtons[random].titleLabel?.text
+            if country == correctAnswerCountry{
+                continue
+            }
+            if !countriesName.contains(country!){
+                countriesName.append(country!)
+                counter += 1
+            }
+        }
+        countriesNamesButtons.forEach { (button) in
+            let country = (button.titleLabel?.text)!
+            if countriesName.contains(country){
+                button.alpha = 0
+            }
+        }
+        
     }
     
     
@@ -295,7 +332,7 @@ extension FlagsViewController{
         shapeLayer.strokeEnd = 0
         
         view.layer.addSublayer(shapeLayer)
-
+        
     }
     
     

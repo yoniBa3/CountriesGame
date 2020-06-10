@@ -27,17 +27,24 @@ class CapitalCitiesViewController: UIViewController {
     
     @IBOutlet weak var hintbutton: UIButton!
     
-    @IBOutlet weak var subRegionLabel: UILabel!
+    @IBOutlet weak var maxLengthLabel: UILabel!
     
     // MARK: Properties
     public static let identifier = "CapitalCityGame"
     
     var userScoreDelegete: UserScoreDelgete!
     var countries = [Country]()
-    var maximumTimeToAnswer: Double = 0
+    var level:Level!
     private var userScore = 0 {
         didSet{
-            userScoreLabel.text = "Your Score is: \(userScore)"
+            //userScoreLabel.text = "Your Score is: \(userScore)"
+            let message = "Your Score is: \(userScore)"
+            var color = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
+            if userScore < 0{
+                color = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            }
+            userScoreLabel.text = message
+            userScoreLabel.textColor = color
         }
     }
     private var randomNumber = 0
@@ -71,6 +78,9 @@ class CapitalCitiesViewController: UIViewController {
             userScore += 1
         }else{
             sender.backgroundColor = .red
+            if level == Level.hard{
+                userScore -= 1
+            }
         }
         isComponnetsEnable(isEnable: false)
         timer.invalidate()
@@ -81,7 +91,10 @@ class CapitalCitiesViewController: UIViewController {
     }
     
     @IBAction func hintButtonTapped(_ sender: UIButton) {
-        disableHalfButtons()
+        UIView.animate(withDuration: 0.75) {
+            self.showHint()
+        }
+        
         sender.isEnabled = false
     }
     
@@ -89,8 +102,8 @@ class CapitalCitiesViewController: UIViewController {
     // MARK: Functions
     
     func configurePage() {
-        isComponnetsEnable(isEnable: false)
         
+        isComponnetsEnable(isEnable: false)
         configureButtonsCornerRadiusAndHideLabels()
     }
     
@@ -100,9 +113,9 @@ class CapitalCitiesViewController: UIViewController {
         citiesNameButton.forEach {
             $0.layer.cornerRadius = 10
         }
-        hintbutton.layer.cornerRadius = 10
+        hintbutton.layer.cornerRadius = hintbutton.bounds.size.width / 2
         countryNameLabel.isHidden = true
-        subRegionLabel.isHidden = true
+        maxLengthLabel.isHidden = true
         
     }
     
@@ -114,7 +127,9 @@ class CapitalCitiesViewController: UIViewController {
     }
     
     private func resetGame() {
-        subRegionLabel.isHidden = true
+        isComponnetsEnable(isEnable: true)
+        hintbutton.isEnabled = level != Level.hard
+        maxLengthLabel.isHidden = true
         randomNumber = Int.random(in: 0..<countries.count)
         correctAnswer = countries[randomNumber].capital
         if correctAnswer == ""{
@@ -123,7 +138,7 @@ class CapitalCitiesViewController: UIViewController {
         if timer != nil {
             timer.invalidate()
         }
-        isComponnetsEnable(isEnable: true)
+        
         startTimer()
         countryNameLabel.text = countries[randomNumber].name
         countryNameLabel.isHidden = false
@@ -139,7 +154,7 @@ class CapitalCitiesViewController: UIViewController {
         while citiesNames.count < citiesNameButton.count {
             let random = Int.random(in: 0..<countries.count)
             let cityName = countries[random].capital
-            if !citiesNames.contains(cityName) || cityName == ""{
+            if !citiesNames.contains(cityName) && cityName != ""{
                 citiesNames.append(cityName)
             }
         }
@@ -150,34 +165,22 @@ class CapitalCitiesViewController: UIViewController {
             button.titleLabel?.textAlignment = .center
             button.titleLabel?.lineBreakMode = .byWordWrapping
             button.backgroundColor = .white
-            button.backgroundImage(for: .disabled)
         }
+    }
+    private func showHint(){
+        var amountOfExtraLetters = 0
+        switch level {
+        case .easy:
+            amountOfExtraLetters = 1
+        default:
+            amountOfExtraLetters = 2
+        }
+        let message = "The maximum length is: "
+        maxLengthLabel.text = message + String(correctAnswer.count + amountOfExtraLetters)
+        maxLengthLabel.isHidden = false
     }
     
-    private func disableHalfButtons() {
-        var isAppendCity = false
-        var citys = [correctAnswer]
-        print(correctAnswer)
-        while !isAppendCity {
-            let random = Int.random(in: 0..<citiesNameButton.count)
-            let city = citiesNameButton[random].titleLabel?.text
-            if !citys.contains(city ?? ""){
-                print(city ?? "")
-                citys.append(city ?? "")
-                isAppendCity = true
-            }
-        }
-        
-        citiesNameButton.forEach { (button) in
-            let city = button.titleLabel?.text ?? ""
-            if !citys.contains(city){
-                button.setTitle("", for: .normal)
-                button.backgroundColor = view.backgroundColor
-                
-            }
-        }
-        
-    }
+    
     
     
     
@@ -199,11 +202,11 @@ class CapitalCitiesViewController: UIViewController {
             hundredtMessage = hundredth < 10 ? "0\(hundredth)" : "\(hundredth)"
             self.timerLabel.text = secondMessage + ":" + hundredtMessage
             
-            if seconds == Int(self.maximumTimeToAnswer){
+            if seconds == Int(self.level.rawValue){
                 self.timer.invalidate()
             }
             
-            if Double(seconds) > self.maximumTimeToAnswer * 0.66{
+            if Double(seconds) > self.level.rawValue * 0.66{
                 self.timerLabel.textColor = .red
             }
         })
