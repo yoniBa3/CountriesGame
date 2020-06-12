@@ -13,10 +13,7 @@ import UIKit
 class CapitalCitiesViewController: UIViewController {
 
     // MARK: -Outlets
-<<<<<<< HEAD
-=======
-    
->>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
+
     @IBOutlet weak var startGameButton: UIButton!
     @IBOutlet weak var userScoreLabel: UILabel!
     @IBOutlet weak var countryNameLabel: UILabel!
@@ -59,10 +56,7 @@ class CapitalCitiesViewController: UIViewController {
         userScoreDelegete.scoreChange(with: userScore)
     }
     
-<<<<<<< HEAD
-=======
-    
->>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
+
     // MARK: -Actions
     @IBAction func xMarkButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -97,11 +91,7 @@ class CapitalCitiesViewController: UIViewController {
         sender.isEnabled = false
     }
     
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
     // MARK: -Functions
     
     func configurePage() {
@@ -176,11 +166,7 @@ class CapitalCitiesViewController: UIViewController {
         maxLengthLabel.text = message + String(correctAnswer.count + amountOfExtraLetters)
         maxLengthLabel.isHidden = false
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
     private func startTimer() {
         timerLabel.textColor = .white
         var seconds = 0
@@ -205,8 +191,5 @@ class CapitalCitiesViewController: UIViewController {
             }
         })
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
 }

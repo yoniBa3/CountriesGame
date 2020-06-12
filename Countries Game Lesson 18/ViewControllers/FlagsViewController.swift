@@ -296,10 +296,7 @@ extension FlagsViewController{
         view.layer.addSublayer(shapeLayer)
     }
     
-<<<<<<< HEAD
-=======
-    
->>>>>>> f900131ea214e2bc4c8857faa942f73aec1ceb14
+
     private func animateCircle() {
         let duration: CFTimeInterval = 2
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
